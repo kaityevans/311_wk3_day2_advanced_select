@@ -34,12 +34,16 @@ ANSWER ************* SELECT state, SUM(user_id) FROM usersAddress GROUP BY state
 2. Find the most popular area code in the `usersContact` table. 
   * Hint: SUBSTR, GROUP BY
 
-ANSWER *************
+ANSWER *************   SELECT LEFT(phone1, 3) AS AreaCode, COUNT(*) AS TotalCount
+  FROM usersContact
+  GROUP BY AreaCode ORDER BY TotalCount DESC;
 
 3. Find the MIN first_name, the county, and a count of all users in that county for counties with more than 10 users. There will be four results. List the last one. 
   * Hint: MIN, COUNT, JOIN, GROUP BY, HAVING
 
-ANSWER *************
+ANSWER ************* SELECT MIN(first_name), county, COUNT(first_name) AS TotalCount
+FROM users JOIN usersAddress WHERE users.id = usersAddress.user_id
+GROUP BY county HAVING TotalCount > 10;
 
 ## Query Responses
 
@@ -50,12 +54,12 @@ ANSWER *************
   * WY: 1271
 
 2.
-  * Area code:
+  * Area code: 973
 
 3.
-  * first_name:
-  * county:
-  * county total:
+  * first_name: Andra 
+  * county: New York
+  * county total: 15
 
 
 ## Summary
